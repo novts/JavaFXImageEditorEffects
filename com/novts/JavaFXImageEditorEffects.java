@@ -897,8 +897,17 @@ slidertopOffsetRef.setValue(0.0);
         btnSIn.setStyle("-fx-font: bold 16pt Georgia;" );
         btnSIn.setOnMouseClicked((MouseEvent e)-> {
     try {
-        WritableImage wimg = imv.snapshot(new SnapshotParameters(), null);
-        BufferedImage screenShot = SwingFXUtils.fromFXImage(wimg, null);
+
+        Robot robot = new Robot();
+        int x= (int) primaryStage.getX()+(int)stack.getLayoutX()+(int)primaryStage.getScene().getX();
+        int y= (int) primaryStage.getY()+(int)stack.getLayoutY()+(int)primaryStage.getScene().getY();
+
+        int width=(int)stack.getLayoutBounds().getWidth();
+        int height=(int)stack.getLayoutBounds().getHeight();
+
+        Rectangle rec=new Rectangle(x,y,width,height);
+        BufferedImage screenShot = robot.createScreenCapture(rec);
+
 FileChooser fileChooserIn=new FileChooser();
 fileChooserIn.setInitialDirectory(new java.io.File("C:/users"));
 fileChooserIn.setTitle("Save image");
